@@ -1,6 +1,6 @@
 import * as firebase from "firebase/app";
 import 'firebase/firestore';
-// import 'firebase/auth';
+import 'firebase/auth';
 
 // Initialize Firebase with R51 Firebase configuration
 firebase.initializeApp({

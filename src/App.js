@@ -2,6 +2,8 @@ import React from 'react';
 
 import { BrowserRouter as Router } from "react-router-dom";
 
+import { UserProvider } from './Contexts/UserContext';
+
 import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Table from 'react-bootstrap/Table';
@@ -24,7 +26,9 @@ const App = () => (
       <h1>yeah</h1>
     </Table>
     <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">
-      <Routes />
+      <UserProvider>
+        <Routes />
+      </UserProvider>
     </Container>
   </Router>
 );
