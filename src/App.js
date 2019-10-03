@@ -20,9 +20,6 @@ const App = () => (
         Shishir's Dream
       </h1>
     </Jumbotron>
-    <Table>
-      <h1>yeah</h1>
-    </Table>
     <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">
       <Routes />
     </Container>
