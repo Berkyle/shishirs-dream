@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import LoginPage from './LoginPage.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './Components/Home';
@@ -13,6 +12,7 @@ import LoginPage from './LoginPage';
 import NotFound from './Components/NotFound';
 import ViewRoom from './Components/ViewRoom';
 import JoinRoom from './Components/Room';
+import Lyrics from './Components/Lyrics';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route component={LoginPage} path="/login" exact />
         <Route component={ViewRoom} path="/view" exact />
         <Route component={JoinRoom} path="/joinroom" exact />
+        <Route component={Lyrics} path="/view/lyrics" exact />
         <Route component={NotFound} />
       </Switch>
     </Router>
