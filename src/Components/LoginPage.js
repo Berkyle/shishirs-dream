@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./LoginPage.css";
-
-import { facebookProvider } from './Firebase/Firebase';
+import { facebookProvider, firebase } from '../Firebase/Firebase';
 // Log in with firebase
 // https://firebase.google.com/docs/auth?authuser=0
 // https://firebase.google.com/docs/auth/web/start?authuser=0

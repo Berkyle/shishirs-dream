@@ -3,7 +3,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Home from './Home';
-import LoginPage from '../LoginPage';
+import LoginPage from './LoginPage';
 import NotFound from './NotFound';
 import ViewRoom from './ViewRoom';
 import JoinRoom from './Room';
