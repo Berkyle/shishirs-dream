@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import {auth} from '../Firebase/Firebase';
 
 const JoinRoom = ({history}) => {
 
@@ -11,9 +12,18 @@ const JoinRoom = ({history}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setRoomId('')
-    setPassword('')
-    history.push("/view")
+    const user = roomId + '@mydomain.com';
+    auth.signInWithEmailAndPassword(user, password)
+    .then((success) => {
+      alert(JSON.stringify(success, null, 2))
+      history.push('/view');
+    }).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert('Error logging in');
+      console.log(errorCode);
+      history.push('/joinroom');
+    });
   }
 
   return (
