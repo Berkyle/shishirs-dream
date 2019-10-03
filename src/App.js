@@ -9,7 +9,6 @@ import LoginPage from './LoginPage.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './Components/Home';
-import LoginPage from './LoginPage';
 import NotFound from './Components/NotFound';
 import ViewRoom from './Components/ViewRoom';
 import JoinRoom from './Components/Room';
