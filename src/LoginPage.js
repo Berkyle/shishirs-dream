@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "./LoginPage.css";
 
+import { facebookProvider } from './Firebase/Firebase';
+// Log in with firebase
+// https://firebase.google.com/docs/auth?authuser=0
+// https://firebase.google.com/docs/auth/web/start?authuser=0
+
 const LoginPage = props => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
