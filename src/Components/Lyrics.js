@@ -19,10 +19,10 @@ const Lyrics = ({history}) => {
   //     .catch(err => console.log(err));
   // });
 
-  // const goBack = (event) => {
-  //   event.preventDefault()
-  //   history.push("/view")
-  // }
+  const goBack = (event) => {
+    event.preventDefault()
+    history.push("/view")
+  }
 
   // const getLyrics = (data) => {
   //   setTrackId(data.message.body.track_list[0].track['track_id'])
