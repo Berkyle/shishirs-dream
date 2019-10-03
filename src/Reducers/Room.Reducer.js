@@ -1,4 +1,4 @@
-// import { eventsCollection } from '../Firebase/firebase';
+import { roomsCollection } from '../Firebase/Firebase';
 
 const RoomReducer = (room, action) => {
 
@@ -6,6 +6,7 @@ const RoomReducer = (room, action) => {
     case "CREATE":
       room = action.room;
       console.log(action.room);
+      roomsCollection.add(room);
       return room;
     default:
       return room;

@@ -15,7 +15,7 @@ const MakeRoom = props => {
     const [roomPwd, setRoomPwd] = useState("");
 
     useEffect(() => {
-        if(accessToken !== "" && window.location.href.includes("access_token")) {
+        if(window.location.href.includes("access_token")) {
             var access_token = window.location.href.split("=")[1].split("&")[0];
             setAccessToken(access_token);
         }
