@@ -9,6 +9,7 @@ import './App.css';
 import Home from './Components/Home';
 import LoginPage from './LoginPage';
 import NotFound from './Components/NotFound';
+import ViewRoom from './Components/ViewRoom';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Switch>
         <Route component={Home} path="/" exact />
         <Route component={LoginPage} path="/login" exact />
+        <Route component={ViewRoom} path="/view" exact />
         <Route component={NotFound} />
       </Switch>
     </Router>
