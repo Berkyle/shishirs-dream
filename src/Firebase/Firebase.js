@@ -4,14 +4,14 @@ import 'firebase/firestore';
 
 // Initialize Firebase with R51 Firebase configuration
 firebase.initializeApp({
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
+  apiKey: "AIzaSyAR-UPyzx-McojsDHgcBWcIwC_GBpTB7M0",
+  authDomain: "shishirs-dream-51381.firebaseapp.com",
+  databaseURL: "https://shishirs-dream-51381.firebaseio.com",
+  projectId: "shishirs-dream-51381",
   storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
-  measurementId: ""
+  messagingSenderId: "139439801958",
+  appId: "1:139439801958:web:c5dbac957ad5d8aafc0fa7",
+  measurementId: "G-WW1KE2TSY3"
 });
 
 // DATABASE
