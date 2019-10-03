@@ -24,3 +24,31 @@
 .App-link {
   color: #09d3ac;
 }
+
+.h1-center {
+  width: 50%;
+}
+
+h1 {
+  color: white;
+  vertical-align: 50%;
+  float: none;
+  margin: 0 auto;
+}
+
+h2 {
+  float: none;
+  margin: 0 auto;
+}
+
+.heading-color {
+  background-color: #76528BFF;
+  height: 100px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.body-color {
+  background-color: #CBCE91FF;
+}
