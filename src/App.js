@@ -10,6 +10,7 @@ import Home from './Components/Home';
 import LoginPage from './LoginPage';
 import NotFound from './Components/NotFound';
 import ViewRoom from './Components/ViewRoom';
+import JoinRoom from './Components/Room';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route component={Home} path="/" exact />
         <Route component={LoginPage} path="/login" exact />
         <Route component={ViewRoom} path="/view" exact />
+        <Route component={JoinRoom} path="/joinroom" exact />
         <Route component={NotFound} />
       </Switch>
     </Router>
