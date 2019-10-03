@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { UserProvider } from './Contexts/UserContext';
+import { RoomProvider } from './Contexts/RoomContext';
 
 import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
@@ -24,7 +25,10 @@ const App = () => (
     </Jumbotron>
     <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">
       <UserProvider>
-        <Routes />
+          <RoomProvider>
+
+            <Routes />
+          </RoomProvider>
       </UserProvider>
     </Container>
   </Router>

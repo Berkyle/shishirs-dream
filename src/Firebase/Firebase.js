@@ -16,13 +16,16 @@ firebase.initializeApp({
 
 // DATABASE
 // const eventsCollection = store.collection('events');
+const store = firebase.firestore();
+const roomsCollection = store.collection('rooms');
+
 
 // USERS & AUTHENTICATION
 const auth = firebase.auth();
-const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 export { 
   firebase,
+  store,
+  roomsCollection,
   auth,
-  facebookProvider
 };
