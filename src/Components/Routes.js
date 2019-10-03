@@ -7,11 +7,13 @@ import NotFound from './NotFound';
 import ViewRoom from './ViewRoom';
 import JoinRoom from './Room';
 import MakeRoom from './MakeRoom';
+import Lyrics from './Lyrics';
 
 const Routes = () => (
   <Switch>
     <Route component={Home} path="/" exact />
     <Route component={ViewRoom} path="/view" exact />
+    <Route component={Lyrics} path="/view/lyrics" exact />
     <Route component={JoinRoom} path="/joinroom" exact />
     <Route component={MakeRoom} path="/makeRoom" exact/>
     <Route component={NotFound} />
