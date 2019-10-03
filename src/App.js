@@ -1,31 +1,28 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import Container from 'react-bootstrap/Container';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
+import Routes from "./Components/Routes";
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import LoginPage from './LoginPage.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Home from './Components/Home';
-import LoginPage from './LoginPage';
-import NotFound from './Components/NotFound';
-import ViewRoom from './Components/ViewRoom';
-import JoinRoom from './Components/Room';
-
-function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route component={Home} path="/" exact />
-        <Route component={LoginPage} path="/login" exact />
-        <Route component={ViewRoom} path="/view" exact />
-        <Route component={JoinRoom} path="/joinroom" exact />
-        <Route component={NotFound} />
-      </Switch>
-    </Router>
-  );
-}
+const App = () => (
+  <Router>
+    <Jumbotron className="mb-0" style={{ borderRadius: 0, backgroundColor: "black" }}>
+      <h1 id="title" style={{ color: "white" }} className="display-4 text-center">
+        Shishir's Dream
+      </h1>
+    </Jumbotron>
+    <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">
+      <Routes />
+    </Container>
+  </Router>
+);
 
 export default App;
