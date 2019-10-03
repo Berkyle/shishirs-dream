@@ -11,11 +11,11 @@ const Home = () => {
   return (
     <Container>
       <Row>
-        <Col>
-          <Button variant="success"></Button>
+        <Col xs={6}>
+          <Button variant="success">Make room (not working)</Button>
         </Col>
-        <Col>
-          <Button variant="info"></Button>
+        <Col xs={6}>
+          <Button variant="info">Join room  (not working)</Button>
         </Col>
       </Row>
     </Container>

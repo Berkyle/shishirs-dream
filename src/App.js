@@ -1,15 +1,24 @@
 import React from 'react';
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import LoginPage from './LoginPage.js';
+
+import Home from './Components/Home';
+import LoginPage from './LoginPage';
+import NotFound from './Components/NotFound';
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-      <LoginPage/>
-    </div>
+    <Router>
+      <Switch>
+        <Route component={Home} path="/" exact />
+        <Route component={LoginPage} path="/login" exact />
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
   );
 }
 
