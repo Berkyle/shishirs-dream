@@ -13,14 +13,14 @@ const Home = () => (
       <Row className="justify-content-center py-4">
         <Col xs={10}>
           <Link to="/joinroom">
-            <Button block size="lg" variant="success">Make room</Button>
+            <Button block size="lg" variant="success">Join Room</Button>
           </Link>
         </Col>
       </Row>
       <Row className="justify-content-center py-4">
         <Col xs={10}>
           <Link to="/login">
-            <Button block size="lg" variant="info">Join room</Button>
+            <Button block size="lg" variant="info">Make Room</Button>
           </Link>
         </Col>
       </Row>
