@@ -15,7 +15,6 @@ const JoinRoom = ({history}) => {
     const user = roomId + '@mydomain.com';
     auth.signInWithEmailAndPassword(user, password)
     .then((success) => {
-      alert(JSON.stringify(success, null, 2))
       history.push('/view');
     }).catch(function(error) {
       var errorCode = error.code;

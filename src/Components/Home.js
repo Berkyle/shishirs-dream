@@ -24,7 +24,7 @@ const Home = () => {
         </Row>
         <Row className="justify-content-center py-4">
           <Col xs={10}>
-            <Link to="/login">
+            <Link to="/joinroom">
               <Button block size="lg" variant="info">
                 Join room
               </Button>
