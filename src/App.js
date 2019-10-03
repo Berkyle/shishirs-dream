@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-
-import Home from './Components/Home';
-
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import LoginPage from './LoginPage.js';
 
 function App() {
   return (
     <div className="App">
       <Home />
+      <LoginPage/>
     </div>
   );
 }
