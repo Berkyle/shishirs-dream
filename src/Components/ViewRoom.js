@@ -34,7 +34,7 @@ const ViewRoom = ({ history }) => {
   const id = room.playlistId;
   const token = room.access_token;
 
-  axios.get(`https://api.spotify.com/v1/playists/${id}/tracks`, {
+  axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/json",
