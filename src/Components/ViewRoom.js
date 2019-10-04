@@ -51,8 +51,27 @@ const ViewRoom = ({ history }) => {
   }, [room])
 
   const handleSubmit = (event) => {
-    setTrackID("spotify:track:" + url.split('?')[0].split("/")[4]);
-    alert("HI")
+    event.preventDefault()
+    var val = "spotify%3Atrack%3A" + url.split('?')[0].split("/")[4];
+    alert(val);
+    
+    const id = room.playlistId;
+    const token = room.access_token;
+    console.log(trackID);
+
+    axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=${val}`, {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      // params: {
+      //   "uris": [val],
+      // }
+    }).then(response => {
+      console.log(response);
+      history.push('/joinroom');
+    }).catch(error => console.log(error))
   }
 
   const getLyrics = (event) => {
