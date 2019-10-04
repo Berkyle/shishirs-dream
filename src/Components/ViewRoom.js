@@ -57,17 +57,19 @@ const ViewRoom = ({ history }) => {
     
     const id = room.playlistId;
     const token = room.access_token;
-    console.log(trackID);
+    console.log(room);
 
-    axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=${val}`, {
+    // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=${val.replace(/:/g ,'%3A')}`, {
+    // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=spotify%3Atrack%3A3VZQshi4COChhXaz7cLP02`, {
+    axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
-      // params: {
-      //   "uris": [val],
-      // }
+      body: {
+        "uris": [val] //.replace(/:/g ,'%3A'),
+      }
     }).then(response => {
       console.log(response);
       history.push('/joinroom');
@@ -104,7 +106,7 @@ const ViewRoom = ({ history }) => {
             <th>&#128247;</th>
             <th>Title </th>
             <th>Artist</th>
-            <th>Length</th>
+            <th>Album</th>
           </tr>
         </thead>
         <tbody>
