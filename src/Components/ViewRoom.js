@@ -1,5 +1,3 @@
-import * as $ from "jquery";
-import Player from "./Player";
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
@@ -10,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import '../App.css';
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
-
+const roomName = "BIGPLAY"
 
 const ViewRoom = ({history}) => {
 
@@ -24,17 +22,23 @@ const ViewRoom = ({history}) => {
   }
   return(
     <div>
-      <Button onClick={goBack} variant="secondary">
-      <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
-      </Button>
-      <h1>
-        View Playlist
-      </h1>
-      <div class="row" style={{display: 'flex', justifyContent: 'center'}}>
+      <div id = "title">
+        <h1 style={{float: "center", position: "relative"}}>
+          <Button style={{float: "left", position: "relative", top: "5px"}} onClick={goBack} variant="secondary">
+            <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
+          </Button>
+          {roomName}
+        </h1>
+      </div> 
+      <div className="row" style={{display: 'flex', justifyContent: 'center'}}>
         <MDBCol md="6">
-          <MDBFormInline className="form-inline mt-4 mb-4" onSubmit={handleSubmit}>
+          <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
+            <Row>
             <MDBIcon icon="search" />
-            <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search"/>
+            </Row>
+            <Col>
+            <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search"/>
+            </Col>
           </MDBFormInline>
         </MDBCol>
       </div>

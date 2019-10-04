@@ -13,14 +13,15 @@ import FormControl from 'react-bootstrap/FormControl'
 import Home from './Home';
 import NotFound from './NotFound';
 import ViewRoom from './ViewRoom';
-import JoinRoom from './Room';
+import JoinRoom from './JoinRoom';
 import MakeRoom from './MakeRoom';
 import Lyrics from './Lyrics';
 
 const Routes = () => {
 
   const { token, logUserOut } = useContext(UserContext);
-  const url = 'https://accounts.spotify.com/en/logout'  
+  const url = 'https://accounts.spotify.com/en/logout'
+  const userName = "Daddy David"
 
   const logOut = (event) => {
     logUserOut()
@@ -29,10 +30,10 @@ const Routes = () => {
 
   return (
     <Fragment>
-      <Navbar bg="dark" variant="dark">
-        {token && <Navbar.Brand>Some User Name</Navbar.Brand>}
+      <Navbar className="justify-content-between" bg="dark" variant="dark">
+        {token && <Navbar.Brand>{userName}</Navbar.Brand>}
         <Form inline>
-          {token && <Link to='/'><Button variant="outline-info" onClick={logOut}>Log out</Button></Link>}
+          {token && <Link to='/'><Button variant="secondary" onClick={logOut}>Log out</Button></Link>}
         </Form>
       </Navbar>
       <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">

@@ -1,9 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment } from "react";
 
 import { Link } from "react-router-dom";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Container from 'react-bootstrap/Container';
 
 import Button from "react-bootstrap/Button";
 
@@ -23,16 +24,14 @@ const scopes = [
 const Home = ({history}) => {
 
   return (
+    <Container>
     <Fragment>
       <div>
-        <h1>
-          Home
-        </h1>
         <Row className="justify-content-center py-4">
           <Col xs={10}>
             <div>
               <a href={`${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token`}>
-                <Button block size="lg" variant="success">
+                <Button block size="lg" variant="dark">
                   Make room
                 </Button>
               </a>
@@ -42,7 +41,7 @@ const Home = ({history}) => {
         <Row className="justify-content-center py-4">
           <Col xs={10}>
             <Link to="/joinroom">
-              <Button block size="lg" variant="info">
+              <Button block size="lg" variant="dark">
                 Join room
               </Button>
             </Link>
@@ -50,6 +49,7 @@ const Home = ({history}) => {
         </Row>
       </div>
     </Fragment>
+    </Container>
   );
 };
 

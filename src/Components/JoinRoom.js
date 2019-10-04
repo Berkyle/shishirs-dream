@@ -49,19 +49,19 @@ const JoinRoom = ({history}) => {
     <Container>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="roomId">
-          <Form.Label>Room ID</Form.Label>
+          <Form.Label style={{color: 'white'}}><b>Room ID</b></Form.Label>
           <Form.Control type="roomId"  placeholder="Enter RoomID" value={roomId} onChange={(event) => {
             setRoomId(event.target.value)
           }}/>
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label style={{color: 'white'}}><b>Password</b></Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => {
             setPassword(event.target.value)
           }}/>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="dark" type="submit">
           Submit
         </Button>
       </Form>
