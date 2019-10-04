@@ -69,10 +69,10 @@ const ViewRoom = ({ history }) => {
         <MDBCol md="6">
           <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
             <Row>
-              <MDBIcon icon="search" />
+              <MDBIcon icon="plus" />
             </Row>
             <Col>
-              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search" />
+              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" />
             </Col>
           </MDBFormInline>
         </MDBCol>
