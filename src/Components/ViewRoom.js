@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 // eslint-disable-next-line
 import Col from 'react-bootstrap/Col';
 import '../App.css';
@@ -61,10 +62,10 @@ const ViewRoom = ({ history }) => {
     alert("HI")
   }
   return (
-    <div>
+    <Container>
       <div id="title">
         <h1 style={{ float: "center", position: "relative" }}>
-          <Button style={{ float: "left", position: "relative", top: "5px" }} onClick={goBack} variant="secondary">
+          <Button style={{ float: "left", position: "relative", top: "5px" }} onClick={goBack} variant="dark">
             <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
           </Button>
           {roomName}
@@ -103,7 +104,7 @@ const ViewRoom = ({ history }) => {
 
         </tbody>
       </Table>
-    </div>
+      </Container>
   )
 }
 

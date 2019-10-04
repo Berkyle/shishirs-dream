@@ -5,6 +5,8 @@ import { Form, Button } from 'react-bootstrap';
 import { UserContext } from '../Contexts/UserContext';
 import { RoomContext } from '../Contexts/RoomContext';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 
 const MakeRoom = ({ history }, props) => {
@@ -16,13 +18,18 @@ const MakeRoom = ({ history }, props) => {
     const [roomName, setRoomName] = useState("");
     const [roomPwd, setRoomPwd] = useState("");
 
+    const goBack = (event) => {
+        event.preventDefault()
+        history.push("/")
+    }
+
     useEffect(() => {
         if (window.location.href.includes("access_token")) {
             var access_token = window.location.href.split("=")[1].split("&")[0];
             logUserIn(access_token);
-            window.history.pushState({id: 'makeRoom'}, 'makeRoom', "/makeRoom");
+            window.history.pushState({ id: 'makeRoom' }, 'makeRoom', "/makeRoom");
         }
-        else if(localStorage.getItem('spotify-auth') == null){
+        else if (localStorage.getItem('spotify-auth') == null) {
             history.push('/')
         }
     })
@@ -71,16 +78,25 @@ const MakeRoom = ({ history }, props) => {
         <Container>
             <Form onSubmit={makeRoom}>
                 <Form.Group controlId="roomName">
-                    <Form.Label style={{color: 'white'}}><b>Room Name</b></Form.Label>
+                    <Form.Label style={{ color: 'white' }}><b>Room Name</b></Form.Label>
                     <Form.Control type="name" onChange={(event) => setRoomName(event.target.value)} placeholder="Enter room name" />
                 </Form.Group>
                 <Form.Group controlId="password">
-                    <Form.Label style={{color: 'white'}}><b>Password</b></Form.Label>
+                    <Form.Label style={{ color: 'white' }}><b>Password</b></Form.Label>
                     <Form.Control type="password" onChange={(event) => setRoomPwd(event.target.value)} placeholder="Room password" />
                 </Form.Group>
-                <Button variant="dark" type="submit">
-                    Create Room
-                </Button>
+                <Row className="justify-content-between">
+                    <Col xs="auto">
+                        <Button onClick={goBack} variant="dark">
+                            <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                        </Button>
+                    </Col>
+                    <Col xs="auto">
+                        <Button variant="dark" type="submit" className="ml-auto">
+                            Create Room
+                        </Button>
+                    </Col>
+                </Row>
             </Form>
         </Container>
     )

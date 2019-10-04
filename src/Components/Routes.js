@@ -33,7 +33,7 @@ const Routes = () => {
       <Navbar className="justify-content-between" bg="dark" variant="dark">
         {token && <Navbar.Brand>{userName}</Navbar.Brand>}
         <Form inline>
-          {token && <Link to='/'><Button variant="secondary" onClick={logOut}>Log out</Button></Link>}
+          {token && <Link to='/'><Button variant="dark" onClick={logOut}>Logout</Button></Link>}
         </Form>
       </Navbar>
       <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">
