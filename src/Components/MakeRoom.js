@@ -35,8 +35,7 @@ const MakeRoom = ({ history }, props) => {
                     "Authorization": `Bearer ${access_token}`
                 }
             }).then(response => {
-                setUserName(response.data.display_name)
-                logUserIn(access_token);
+                logUserIn(response.data.display_name, access_token);
                 window.history.pushState({ id: 'makeRoom' }, 'makeRoom', "/makeRoom");
             }).catch(error => console.log(error));
         }

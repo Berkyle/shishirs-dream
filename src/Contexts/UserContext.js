@@ -8,18 +8,25 @@ export const UserContext = createContext();
 export const UserProvider = props => {
 
   const [token, setToken] = useState(null);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState(null);
 
   const spotifyAuth = 'spotify-auth';
+  const userAuth = 'user-auth';
 
   useEffect(() => {
     const tokenCheck = localStorage.getItem(spotifyAuth)
     if (tokenCheck != null) {
       setToken(tokenCheck);
     }
+    const userCheck = localStorage.getItem(userAuth)
+    if (userCheck != null) {
+      setUserName(userCheck);
+    }
   }, [])
 
-  const logUserIn = (token) => {
+  const logUserIn = (user, token) => {
+    setUserName(user);
+    localStorage.setItem(userAuth, user);
     setToken(token);
     localStorage.setItem(spotifyAuth, token);
   }
@@ -27,6 +34,8 @@ export const UserProvider = props => {
   const logUserOut = () => {
     setToken(null);
     localStorage.removeItem(spotifyAuth);
+    setUserName(null);
+    localStorage.removeItem(userAuth);
   }
 
   return (
