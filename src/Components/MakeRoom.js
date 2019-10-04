@@ -77,6 +77,7 @@ const MakeRoom = ({ history }, props) => {
     return (
         <Container>
             <Form onSubmit={makeRoom}>
+                <h1>Make Room</h1>
                 <Form.Group controlId="roomName">
                     <Form.Label style={{ color: 'white' }}><b>Room Name</b></Form.Label>
                     <Form.Control type="name" onChange={(event) => setRoomName(event.target.value)} placeholder="Enter room name" />

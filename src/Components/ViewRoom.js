@@ -25,7 +25,7 @@ const ViewRoom = ({ history }) => {
 
   const goBack = (event) => {
     event.preventDefault()
-    history.push("/makeRoom")
+    history.push("/")
   }
 
   useEffect(() => {
@@ -55,6 +55,12 @@ const ViewRoom = ({ history }) => {
 
   const handleSubmit = (event) => {
     setTrackID("spotify:track:" + url.split('?')[0].split("/")[4]);
+    alert("HI")
+  }
+
+  const getLyrics = (event) => {
+    setTrackID("spotify:track:" + url.split('?')[0].split("/")[4]);
+    history.push('/view/lyrics')
   }
 
   return (
@@ -68,10 +74,10 @@ const ViewRoom = ({ history }) => {
         <MDBCol md="6">
           <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
             <Row>
-              <MDBIcon icon="plus" />
+              <Button size="sm" variant="dark"><MDBIcon icon="plus" onClick={handleSubmit} /></Button>
             </Row>
             <Col>
-              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" onChange={event => setUrl(event.target.value)} value={url}/>
+              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" onChange={event => setUrl(event.target.value)} value={url} />
             </Col>
           </MDBFormInline>
         </MDBCol>
@@ -97,10 +103,19 @@ const ViewRoom = ({ history }) => {
 
         </tbody>
       </Table>
-      <Button size = "lg" className="mx-auto" onClick={goBack} variant="dark">
-        <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
-      </Button>
-      </Container>
+      <Row className="justify-content-between">
+        <Col xs="auto">
+          <Button size="lg" className="mx-auto" onClick={goBack} variant="dark">
+            <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button size="lg" variant="dark" type="submit" onClick={getLyrics}>
+            Get Lyrics
+            </Button>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

@@ -55,6 +55,7 @@ const JoinRoom = ({ history }) => {
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
+        <h1>Join Room</h1>
         <Form.Group controlId="roomId">
           <Form.Label style={{ color: 'white' }}><b>Room ID</b></Form.Label>
           <Form.Control type="roomId" placeholder="Enter RoomID" value={roomId} onChange={(event) => {
@@ -77,7 +78,7 @@ const JoinRoom = ({ history }) => {
           <Col xs="auto">
             <Button size="lg" variant="dark" type="submit">
               Submit
-        </Button>
+            </Button>
           </Col>
         </Row>
       </Form>
