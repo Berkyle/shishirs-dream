@@ -25,16 +25,10 @@ const ViewRoom = ({history}) => {
     history.push("/makeRoom")
   }
 
-  var request = new XMLHttpRequest()
-
-  // Open a new connection, using the GET request on the URL endpoint
-  request.open('GET', 'https://api.spotify.com/v1/playists/${id}/tracks', true)
-
-    console.log(room);
+  useEffect(() => {
     const id = room.playlistId;
     const token = room.access_token;
-    
-    axios.get(`https://api.spotify.com/v1/playists/${id}/tracks`, {
+    axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -44,18 +38,16 @@ const ViewRoom = ({history}) => {
       console.log(response);
       const trackList = response.data.items.map(item => ({
         title: item.track.name,
-        artist: item.track.artists.reduce((str, artist) => {
-          return str + artist.name + ', '
-        }, ''),
-        album: item.album.name
+        artist: item.track.artists.reduce((str, artist) => str + artist.name + ', ', ''),
+        album: item.track.album.name,
+        id: item.track.id
       }));
+
+      console.log(trackList);
 
       setTracks(trackList);
     }).catch(error => console.log(error))
-
-  // useEffect(() => {
-    
-  // }, [room])
+  }, [room])
 
   const handleSubmit = (event) => {
     alert("HI")
@@ -87,7 +79,7 @@ const ViewRoom = ({history}) => {
         </thead>
         <tbody>
           {tracks.map(track => (
-            <tr>
+            <tr key={track.id}>
               <td><Image src="public/logo192.png" thumbnail /></td>
               <td>{track.title}</td>
               <td>{track.artist}</td>
