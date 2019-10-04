@@ -25,11 +25,6 @@ const ViewRoom = ({ history }) => {
     history.push("/makeRoom")
   }
 
-  var request = new XMLHttpRequest()
-
-  // Open a new connection, using the GET request on the URL endpoint
-  request.open('GET', 'https://api.spotify.com/v1/playists/${id}/tracks', true)
-
   console.log(room);
   const id = room.playlistId;
   const token = room.access_token;
