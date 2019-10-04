@@ -25,13 +25,16 @@ const ViewRoom = ({history}) => {
     history.push("/makeRoom")
   }
 
-  useEffect(() => {
+  var request = new XMLHttpRequest()
+
+  // Open a new connection, using the GET request on the URL endpoint
+  request.open('GET', 'https://api.spotify.com/v1/playists/${id}/tracks', true)
+
     console.log(room);
     const id = room.playlistId;
     const token = room.access_token;
-    axios({
-      method: "get",
-      url: `https://api.spotify.com/v1/playists/${id}/tracks`,
+    
+    axios.get(`https://api.spotify.com/v1/playists/${id}/tracks`, {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -49,7 +52,10 @@ const ViewRoom = ({history}) => {
 
       setTracks(trackList);
     }).catch(error => console.log(error))
-  }, [room])
+
+  // useEffect(() => {
+    
+  // }, [room])
 
   const handleSubmit = (event) => {
     alert("HI")
