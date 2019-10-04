@@ -26,6 +26,7 @@ const ViewRoom = ({history}) => {
       <h1>
         View Playlist
       </h1>
+      
       <Table responsive striped borderless hover variant="dark">
         <thead>
           <tr>

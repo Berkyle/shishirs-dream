@@ -18,14 +18,9 @@ const scopes = [
   "playlist-modify-public",
   "playlist-read-private",
   "user-read-currently-playing"
-];
-const url = 'https://accounts.spotify.com/en/logout'                                                                                                                                                                                                                                                                               
+];                                                                                                                                                                                                                                                                           
 
-const Home = () => {
-
-  const logOut = (event) => {
-    window.open(url, 'Spotify Logout', 'width=700,height=500,top=40,left=40')
-  }
+const Home = ({history}) => {
 
   return (
     <Fragment>
@@ -41,9 +36,6 @@ const Home = () => {
                   Make room
                 </Button>
               </a>
-              <Button block size="lg" variant="success" onClick={logOut}>
-                  Logout
-                </Button>
             </div>
           </Col>
         </Row>

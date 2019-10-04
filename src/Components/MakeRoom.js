@@ -7,9 +7,9 @@ import { RoomContext } from '../Contexts/RoomContext';
 
 const MakeRoom = ({history}, props) => {
 
-    const { user, setUser } = useContext(UserContext);
+    const {loggedIn, setLoggedIn, token, setToken } = useContext(UserContext);
     const { room, dispatchToRoom } = useContext(RoomContext);
-    const [accessToken, setAccessToken] = useState("");
+    // const [accessToken, setAccessToken] = useState("");
 
     const [roomName, setRoomName] = useState("");
     const [roomPwd, setRoomPwd] = useState("");
@@ -17,15 +17,19 @@ const MakeRoom = ({history}, props) => {
     useEffect(() => {
         if(window.location.href.includes("access_token")) {
             var access_token = window.location.href.split("=")[1].split("&")[0];
-            setAccessToken(access_token);
+            setToken(access_token);
+            setLoggedIn(true);
             window.history.pushState({id: 'makeRoom'}, 'makeRoom', "/makeRoom");
+        }
+        else if(!loggedIn){
+            history.push('/')
         }
     })
 
     const makeRoom = (event) => {
         event.preventDefault();
         const room = {
-            access_token: accessToken,
+            access_token: token,
             roomId: roomName,
             roomPwd: roomPwd
         }
