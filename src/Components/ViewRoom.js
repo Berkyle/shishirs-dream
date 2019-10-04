@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col';
 import '../App.css';
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
-const roomName = "BIGPLAY"
+const roomName = "View Playlist"
 const ViewRoom = ({ history }) => {
 
   const { room } = useContext(RoomContext);
