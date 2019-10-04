@@ -33,9 +33,9 @@ const JoinRoom = ({history}) => {
                 playlistId: doc.data().playlistId,
                 roomId: doc.data().roomId,
                 roomPwd: doc.data().roomPwd
-            }
-              history.push('/view');
+              }
               dispatchToRoom({ type: 'JOIN', room })
+              history.push('/view');
             } else {
               alert('Authentication failed');
             }
