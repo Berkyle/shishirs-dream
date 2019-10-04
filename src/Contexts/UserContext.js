@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 
 // import { auth } from '../Firebase/firebase';
 // import UserReducer from '../Reducers/User.Reducer';
@@ -6,18 +6,29 @@ import React, { useState, createContext } from 'react';
 export const UserContext = createContext();
 
 export const UserProvider = props => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [token, setToken] = useState('');
+    const [token, setToken] = useState(null);
 
-//   auth.onAuthStateChanged((user) => {
-//     console.log('yoooo!')
-//     console.log(user);
-//     if (user) dispatchToEvents({ type: 'LOGIN', user })
-//     else dispatchToEvents({ type: 'LOGIN' })
-//   });
+    const spotifyAuth = 'spotify-auth';
+
+    useEffect(() => {
+      const tokenCheck = localStorage.getItem(spotifyAuth)
+      if(tokenCheck != null) {
+        setToken(tokenCheck);
+      }
+    }, [])
+
+    const logUserIn = (token) => {
+      setToken(token);
+      localStorage.setItem(spotifyAuth, token);
+    }
+
+    const logUserOut = () => {
+      setToken(null);
+      localStorage.removeItem(spotifyAuth);
+    }
 
   return (
-    <UserContext.Provider value={{loggedIn, setLoggedIn, token, setToken }}>
+    <UserContext.Provider value={{ token, logUserIn, logUserOut }}>
       {props.children}
     </UserContext.Provider>
   )
