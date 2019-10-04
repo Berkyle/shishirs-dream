@@ -6,26 +6,27 @@ import React, { useState, createContext, useEffect } from 'react';
 export const UserContext = createContext();
 
 export const UserProvider = props => {
-    const [token, setToken] = useState(null);
 
-    const spotifyAuth = 'spotify-auth';
+  const [token, setToken] = useState(null);
 
-    useEffect(() => {
-      const tokenCheck = localStorage.getItem(spotifyAuth)
-      if(tokenCheck != null) {
-        setToken(tokenCheck);
-      }
-    }, [])
+  const spotifyAuth = 'spotify-auth';
 
-    const logUserIn = (token) => {
-      setToken(token);
-      localStorage.setItem(spotifyAuth, token);
+  useEffect(() => {
+    const tokenCheck = localStorage.getItem(spotifyAuth)
+    if (tokenCheck != null) {
+      setToken(tokenCheck);
     }
+  }, [])
 
-    const logUserOut = () => {
-      setToken(null);
-      localStorage.removeItem(spotifyAuth);
-    }
+  const logUserIn = (token) => {
+    setToken(token);
+    localStorage.setItem(spotifyAuth, token);
+  }
+
+  const logUserOut = () => {
+    setToken(null);
+    localStorage.removeItem(spotifyAuth);
+  }
 
   return (
     <UserContext.Provider value={{ token, logUserIn, logUserOut }}>

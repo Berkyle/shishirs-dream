@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from "react";
 
 import { UserContext } from '../Contexts/UserContext';
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
@@ -32,7 +32,7 @@ const Routes = () => {
       <Navbar bg="dark" variant="dark">
         {token && <Navbar.Brand>Some User Name</Navbar.Brand>}
         <Form inline>
-          {token && <Button variant="outline-info" onClick={logOut}>Log out</Button>}
+          {token && <Link to='/'><Button variant="outline-info" onClick={logOut}>Log out</Button></Link>}
         </Form>
       </Navbar>
       <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">
