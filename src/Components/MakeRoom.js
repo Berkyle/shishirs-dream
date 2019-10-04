@@ -5,7 +5,7 @@ import {Form, Button} from 'react-bootstrap';
 import { UserContext } from '../Contexts/UserContext';
 import { RoomContext } from '../Contexts/RoomContext';
 
-const MakeRoom = props => {
+const MakeRoom = ({history}, props) => {
 
     const { user, setUser } = useContext(UserContext);
     const { room, dispatchToRoom } = useContext(RoomContext);
@@ -18,6 +18,7 @@ const MakeRoom = props => {
         if(window.location.href.includes("access_token")) {
             var access_token = window.location.href.split("=")[1].split("&")[0];
             setAccessToken(access_token);
+            window.history.pushState({id: 'makeRoom'}, 'makeRoom', "/makeRoom");
         }
     })
 
