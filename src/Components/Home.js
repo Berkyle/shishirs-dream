@@ -18,7 +18,7 @@ const scopes = [
   "playlist-modify-public",
   "playlist-read-private",
   "user-read-currently-playing"
-];                                                                                                                                                                                                                                                                           
+];
 
 const Home = ({history}) => {
 
