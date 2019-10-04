@@ -25,32 +25,29 @@ const ViewRoom = ({ history }) => {
     history.push("/makeRoom")
   }
 
-  console.log(room);
-  const id = room.playlistId;
-  const token = room.access_token;
+  useEffect(() => {
+    const id = room.playlistId;
+    const token = room.access_token;
+    axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    }).then(response => {
+      console.log(response);
+      const trackList = response.data.items.map(item => ({
+        title: item.track.name,
+        artist: item.track.artists.reduce((str, artist) => str + artist.name + ', ', ''),
+        album: item.track.album.name,
+        id: item.track.id
+      }));
 
-  axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    }
-  }).then(response => {
-    console.log(response);
-    const trackList = response.data.items.map(item => ({
-      title: item.track.name,
-      artist: item.track.artists.reduce((str, artist) => {
-        return str + artist.name + ', '
-      }, ''),
-      album: item.album.name
-    }));
+      console.log(trackList);
 
-    setTracks(trackList);
-  }).catch(error => console.log(error))
-
-  // useEffect(() => {
-
-  // }, [room])
+      setTracks(trackList);
+    }).catch(error => console.log(error))
+  }, [room])
 
   const handleSubmit = (event) => {
     alert("HI")
@@ -88,7 +85,7 @@ const ViewRoom = ({ history }) => {
         </thead>
         <tbody>
           {tracks.map(track => (
-            <tr>
+            <tr key={track.id}>
               <td><Image src="public/logo192.png" thumbnail /></td>
               <td>{track.title}</td>
               <td>{track.artist}</td>
