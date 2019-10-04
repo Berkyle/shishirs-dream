@@ -14,7 +14,7 @@ const Lyrics = ({history}) => {
 
   useEffect(() => {
     axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
-    axios.get(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_artist=${artist}&q_track=${trackName}&apikey=${API_KEY}`)
+    axios.get(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_artist=${history.location.state.artist}&q_track=${history.location.state.song}&apikey=${API_KEY}`)
       .then(res => getLyrics(res.data))
       .catch(err => console.log(err));
   });
