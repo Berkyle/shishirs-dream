@@ -28,3 +28,5 @@ export {
   roomsCollection,
   auth,
 };
+
+export default store;
