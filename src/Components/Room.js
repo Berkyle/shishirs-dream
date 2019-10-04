@@ -1,28 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react';
+
+import { RoomContext } from '../Contexts/RoomContext';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {auth} from '../Firebase/Firebase';
+import store from '../Firebase/Firebase';
 
 const JoinRoom = ({history}) => {
+
+  const { dispatchToRoom } = useContext(RoomContext)
 
   const [roomId, setRoomId] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const user = roomId + '@mydomain.com';
-    auth.signInWithEmailAndPassword(user, password)
-    .then((success) => {
-      history.push('/view');
-    }).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      alert('Error logging in');
-      console.log(errorCode);
-      history.push('/joinroom');
-    });
+    var rooms = store.collection('rooms');
+
+    var query = rooms.where("roomId", "==", roomId);
+    console.log(query);
+
+    store.collection("rooms").where("roomId", "==", roomId)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data().roomPwd);
+            if (doc.data().roomPwd === password) {
+              const room = {
+                access_token: doc.data().access_token,
+                playlistId: doc.data().playlistId,
+                roomId: doc.data().roomId,
+                roomPwd: doc.data().roomPwd
+            }
+              history.push('/view');
+              dispatchToRoom({ type: 'JOIN', room })
+            } else {
+              alert('Authentication failed');
+            }
+        });
+    })
+
+
   }
 
   return (
