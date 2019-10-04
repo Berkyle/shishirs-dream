@@ -1,6 +1,10 @@
-import * as $ from "jquery";
+import React, { useEffect, useContext, useState } from 'react';
+
+import {RoomContext} from '../Contexts/RoomContext'
+
+import axios from 'axios';
+
 import Player from "./Player";
-import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image';
@@ -13,10 +17,37 @@ import '../App.css';
 
 const ViewRoom = ({history}) => {
 
+  const { room } = useContext(RoomContext);
+
+  const [tracks, setTracks] = useState([])
+
   const goBack = (event) => {
     event.preventDefault()
     history.push("/makeRoom")
   }
+
+  useEffect(() => {
+    const id = room.playlistId;
+    const token = room.access_token;
+    axios({
+      method: "get",
+      url: `https://api.spotify.com/v1/playists/${id}/tracks`,
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+      },
+    }).then(response => {
+      const trackList = response.data.items.map(item => ({
+        title: item.track.name,
+        artist: item.track.artists.reduce((str, artist) => {
+          return str + artist.name + ', '
+        }, ''),
+        album: item.album.name
+      }));
+
+      setTracks(trackList);
+    }).catch(error => console.log(error))
+  }, [room])
 
   return(
     <div>
@@ -37,12 +68,15 @@ const ViewRoom = ({history}) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><Image src="public/logo192.png" thumbnail /></td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>1</td>
-          </tr>
+          {tracks.map(track => (
+            <tr>
+              <td><Image src="public/logo192.png" thumbnail /></td>
+              <td>{track.title}</td>
+              <td>{track.artist}</td>
+              <td>{track.album}</td>
+            </tr>
+          ))}
+          
         </tbody>
       </Table>
     </div>
