@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from "react";
 
 import { UserContext } from '../Contexts/UserContext';
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
@@ -19,21 +19,20 @@ import Lyrics from './Lyrics';
 
 const Routes = () => {
 
-  const { loggedIn, setLoggedIn, token, setToken } = useContext(UserContext);
+  const { token, logUserOut } = useContext(UserContext);
   const url = 'https://accounts.spotify.com/en/logout'  
 
   const logOut = (event) => {
-    setLoggedIn(false)
-    setToken('')
+    logUserOut()
     window.open(url, 'Spotify Logout', 'width=700,height=500,top=40,left=40')
   }
 
   return (
     <Fragment>
       <Navbar bg="dark" variant="dark">
-        {loggedIn && <Navbar.Brand>Some User Name</Navbar.Brand>}
+        {token && <Navbar.Brand>Some User Name</Navbar.Brand>}
         <Form inline>
-          {loggedIn && <Button variant="outline-info" onClick={logOut}>Log out</Button>}
+          {token && <Link to='/'><Button variant="outline-info" onClick={logOut}>Log out</Button></Link>}
         </Form>
       </Navbar>
       <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">

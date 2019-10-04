@@ -12,6 +12,7 @@ import Button from 'react-bootstrap/Button';
 // eslint-disable-next-line
 import Col from 'react-bootstrap/Col';
 import '../App.css';
+import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
 
 
@@ -49,6 +50,9 @@ const ViewRoom = ({history}) => {
     }).catch(error => console.log(error))
   }, [room])
 
+  const handleSubmit = (event) => {
+    alert("HI")
+  }
   return(
     <div>
       <Button onClick={goBack} variant="secondary">
@@ -57,7 +61,14 @@ const ViewRoom = ({history}) => {
       <h1>
         View Playlist
       </h1>
-      
+      <div class="row" style={{display: 'flex', justifyContent: 'center'}}>
+        <MDBCol md="6">
+          <MDBFormInline className="form-inline mt-4 mb-4" onSubmit={handleSubmit}>
+            <MDBIcon icon="search" />
+            <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search"/>
+          </MDBFormInline>
+        </MDBCol>
+      </div>
       <Table responsive striped borderless hover variant="dark">
         <thead>
           <tr>
