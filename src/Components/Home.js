@@ -26,6 +26,9 @@ const Home = () => {
   return (
     <Fragment>
       <div>
+        <h1>
+          Home
+        </h1>
         <Row className="justify-content-center py-4">
           <Col xs={10}>
             <div>
