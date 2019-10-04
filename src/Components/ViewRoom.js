@@ -14,8 +14,6 @@ import Col from 'react-bootstrap/Col';
 import '../App.css';
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
-
-
 const ViewRoom = ({history}) => {
 
   const { room } = useContext(RoomContext);
@@ -28,16 +26,19 @@ const ViewRoom = ({history}) => {
   }
 
   useEffect(() => {
+    console.log(room);
     const id = room.playlistId;
     const token = room.access_token;
     axios({
       method: "get",
       url: `https://api.spotify.com/v1/playists/${id}/tracks`,
       headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-      },
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
     }).then(response => {
+      console.log(response);
       const trackList = response.data.items.map(item => ({
         title: item.track.name,
         artist: item.track.artists.reduce((str, artist) => {
@@ -61,14 +62,14 @@ const ViewRoom = ({history}) => {
       <h1>
         View Playlist
       </h1>
-      <div class="row" style={{display: 'flex', justifyContent: 'center'}}>
+      <Row style={{display: 'flex', justifyContent: 'center'}}>
         <MDBCol md="6">
           <MDBFormInline className="form-inline mt-4 mb-4" onSubmit={handleSubmit}>
             <MDBIcon icon="search" />
             <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search"/>
           </MDBFormInline>
         </MDBCol>
-      </div>
+      </Row>
       <Table responsive striped borderless hover variant="dark">
         <thead>
           <tr>
