@@ -14,11 +14,9 @@ import Col from 'react-bootstrap/Col';
 import '../App.css';
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
-const roomName = "View Playlist"
 const ViewRoom = ({ history }) => {
 
   const { room } = useContext(RoomContext);
-
   const [tracks, setTracks] = useState([])
   const [url, setUrl] = useState('')
   const [trackID, setTrackID] = useState('')
@@ -31,7 +29,6 @@ const ViewRoom = ({ history }) => {
   useEffect(() => {
     const id = room.playlistId;
     const token = room.access_token;
-
     axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
       headers: {
         "Accept": "application/json",
@@ -67,7 +64,7 @@ const ViewRoom = ({ history }) => {
     <Container>
       <div id="title">
         <h1 style={{ float: "center", position: "relative" }}>
-          {roomName}
+          {room.roomId}
         </h1>
       </div>
       <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
