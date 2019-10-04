@@ -14,6 +14,10 @@ const redirectUri = "http://localhost:3000/makeRoom";
 const scopes = [
   "user-read-currently-playing",
   "user-read-playback-state",
+  "playlist-modify-private",
+  "playlist-modify-public",
+  "playlist-read-private",
+  "user-read-currently-playing"
 ];
 const url = 'https://accounts.spotify.com/en/logout'                                                                                                                                                                                                                                                                               
 
