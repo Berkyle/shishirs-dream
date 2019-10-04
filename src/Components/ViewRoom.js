@@ -14,24 +14,21 @@ import Col from 'react-bootstrap/Col';
 import '../App.css';
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
-const roomName = "View Playlist"
 const ViewRoom = ({ history }) => {
 
   const { room } = useContext(RoomContext);
-
   const [tracks, setTracks] = useState([])
   const [url, setUrl] = useState('')
   const [trackID, setTrackID] = useState('')
 
   const goBack = (event) => {
     event.preventDefault()
-    history.push("/makeRoom")
+    history.push("/")
   }
 
   useEffect(() => {
     const id = room.playlistId;
     const token = room.access_token;
-
     axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
       headers: {
         "Accept": "application/json",
@@ -77,21 +74,26 @@ const ViewRoom = ({ history }) => {
     }).catch(error => console.log(error))
   }
 
+  const getLyrics = (event) => {
+    setTrackID("spotify:track:" + url.split('?')[0].split("/")[4]);
+    history.push('/view/lyrics')
+  }
+
   return (
     <Container>
       <div id="title">
         <h1 style={{ float: "center", position: "relative" }}>
-          {roomName}
+          {room.roomId}
         </h1>
       </div>
       <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
         <MDBCol md="6">
           <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
             <Row>
-              <MDBIcon icon="plus" />
+              <Button size="sm" variant="dark"><MDBIcon icon="plus" onClick={handleSubmit} /></Button>
             </Row>
             <Col>
-              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" onChange={event => setUrl(event.target.value)} value={url}/>
+              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" onChange={event => setUrl(event.target.value)} value={url} />
             </Col>
           </MDBFormInline>
         </MDBCol>
@@ -117,10 +119,19 @@ const ViewRoom = ({ history }) => {
 
         </tbody>
       </Table>
-      <Button size = "lg" className="mx-auto" onClick={goBack} variant="dark">
-        <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
-      </Button>
-      </Container>
+      <Row className="justify-content-between">
+        <Col xs="auto">
+          <Button size="lg" className="mx-auto" onClick={goBack} variant="dark">
+            <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button size="lg" variant="dark" type="submit" onClick={getLyrics}>
+            Get Lyrics
+            </Button>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

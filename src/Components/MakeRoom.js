@@ -11,7 +11,7 @@ import axios from 'axios';
 
 const MakeRoom = ({ history }, props) => {
 
-    const { token, logUserIn } = useContext(UserContext);
+    const { userName, setUserName, token, logUserIn } = useContext(UserContext);
     const { room, dispatchToRoom } = useContext(RoomContext);
     // const [accessToken, setAccessToken] = useState("");
 
@@ -26,8 +26,19 @@ const MakeRoom = ({ history }, props) => {
     useEffect(() => {
         if (window.location.href.includes("access_token")) {
             var access_token = window.location.href.split("=")[1].split("&")[0];
-            logUserIn(access_token);
-            window.history.pushState({ id: 'makeRoom' }, 'makeRoom', "/makeRoom");
+
+            axios({
+                method: "get",
+                url: 'https://api.spotify.com/v1/me',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${access_token}`
+                }
+            }).then(response => {
+                setUserName(response.data.display_name)
+                logUserIn(access_token);
+                window.history.pushState({ id: 'makeRoom' }, 'makeRoom', "/makeRoom");
+            }).catch(error => console.log(error));
         }
         else if (localStorage.getItem('spotify-auth') == null) {
             history.push('/')
@@ -77,6 +88,7 @@ const MakeRoom = ({ history }, props) => {
     return (
         <Container>
             <Form onSubmit={makeRoom}>
+                <h1>Make Room</h1>
                 <Form.Group controlId="roomName">
                     <Form.Label style={{ color: 'white' }}><b>Room Name</b></Form.Label>
                     <Form.Control type="name" onChange={(event) => setRoomName(event.target.value)} placeholder="Enter room name" />

@@ -8,6 +8,7 @@ export const UserContext = createContext();
 export const UserProvider = props => {
 
   const [token, setToken] = useState(null);
+  const [userName, setUserName] = useState('');
 
   const spotifyAuth = 'spotify-auth';
 
@@ -29,7 +30,7 @@ export const UserProvider = props => {
   }
 
   return (
-    <UserContext.Provider value={{ token, logUserIn, logUserOut }}>
+    <UserContext.Provider value={{ token, logUserIn, logUserOut, userName, setUserName }}>
       {props.children}
     </UserContext.Provider>
   )

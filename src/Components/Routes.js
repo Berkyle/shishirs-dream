@@ -19,9 +19,8 @@ import Lyrics from './Lyrics';
 
 const Routes = () => {
 
-  const { token, logUserOut } = useContext(UserContext);
+  const { userName, token, logUserOut } = useContext(UserContext);
   const url = 'https://accounts.spotify.com/en/logout'
-  const userName = "Daddy David"
 
   const logOut = (event) => {
     logUserOut()
