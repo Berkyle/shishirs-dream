@@ -87,12 +87,12 @@ const MakeRoom = ({ history }, props) => {
                 </Form.Group>
                 <Row className="justify-content-between">
                     <Col xs="auto">
-                        <Button onClick={goBack} variant="dark">
+                        <Button size="lg" onClick={goBack} variant="dark">
                             <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
                         </Button>
                     </Col>
                     <Col xs="auto">
-                        <Button variant="dark" type="submit" className="ml-auto">
+                        <Button size="lg" variant="dark" type="submit" className="ml-auto">
                             Create Room
                         </Button>
                     </Col>

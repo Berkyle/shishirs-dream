@@ -20,6 +20,8 @@ const ViewRoom = ({ history }) => {
   const { room } = useContext(RoomContext);
 
   const [tracks, setTracks] = useState([])
+  const [url, setUrl] = useState('')
+  const [trackID, setTrackID] = useState('')
 
   const goBack = (event) => {
     event.preventDefault()
@@ -29,6 +31,7 @@ const ViewRoom = ({ history }) => {
   useEffect(() => {
     const id = room.playlistId;
     const token = room.access_token;
+
     axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
       headers: {
         "Accept": "application/json",
@@ -51,15 +54,13 @@ const ViewRoom = ({ history }) => {
   }, [room])
 
   const handleSubmit = (event) => {
-    alert("HI")
+    setTrackID("spotify:track:" + url.split('?')[0].split("/")[4]);
   }
+
   return (
     <Container>
       <div id="title">
         <h1 style={{ float: "center", position: "relative" }}>
-          <Button style={{ float: "left", position: "relative", top: "5px" }} onClick={goBack} variant="dark">
-            <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
-          </Button>
           {roomName}
         </h1>
       </div>
@@ -70,7 +71,7 @@ const ViewRoom = ({ history }) => {
               <MDBIcon icon="plus" />
             </Row>
             <Col>
-              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" />
+              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" onChange={event => setUrl(event.target.value)} value={url}/>
             </Col>
           </MDBFormInline>
         </MDBCol>
@@ -96,6 +97,9 @@ const ViewRoom = ({ history }) => {
 
         </tbody>
       </Table>
+      <Button size = "lg" className="mx-auto" onClick={goBack} variant="dark">
+        <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
+      </Button>
       </Container>
   )
 }
