@@ -6,7 +6,8 @@ import React, { useState, createContext } from 'react';
 export const UserContext = createContext();
 
 export const UserProvider = props => {
-    const [user, setUser] = useState({});
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [token, setToken] = useState('');
 
 //   auth.onAuthStateChanged((user) => {
 //     console.log('yoooo!')
@@ -16,7 +17,7 @@ export const UserProvider = props => {
 //   });
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{loggedIn, setLoggedIn, token, setToken }}>
       {props.children}
     </UserContext.Provider>
   )

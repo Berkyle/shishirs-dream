@@ -23,14 +23,13 @@ const App = () => (
         Shishir's Dream
       </h1>
     </Jumbotron>
-    <Container fluid={true} className="vh-100 pt-5" id="shishirs_dream_container">
+    
       <UserProvider>
           <RoomProvider>
-
             <Routes />
           </RoomProvider>
       </UserProvider>
-    </Container>
+
   </Router>
 );
 
