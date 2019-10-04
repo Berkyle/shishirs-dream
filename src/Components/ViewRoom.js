@@ -14,7 +14,7 @@ import Col from 'react-bootstrap/Col';
 import '../App.css';
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
-const roomName = "BIGPLAY"
+const roomName = "View Playlist"
 const ViewRoom = ({ history }) => {
 
   const { room } = useContext(RoomContext);
@@ -26,37 +26,29 @@ const ViewRoom = ({ history }) => {
     history.push("/makeRoom")
   }
 
-  var request = new XMLHttpRequest()
+  useEffect(() => {
+    const id = room.playlistId;
+    const token = room.access_token;
+    axios.get(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    }).then(response => {
+      console.log(response);
+      const trackList = response.data.items.map(item => ({
+        title: item.track.name,
+        artist: item.track.artists.reduce((str, artist) => str + artist.name + ', ', ''),
+        album: item.track.album.name,
+        id: item.track.id
+      }));
 
-  // Open a new connection, using the GET request on the URL endpoint
-  request.open('GET', 'https://api.spotify.com/v1/playists/${id}/tracks', true)
+      console.log(trackList);
 
-  console.log(room);
-  const id = room.playlistId;
-  const token = room.access_token;
-
-  axios.get(`https://api.spotify.com/v1/playists/${id}/tracks`, {
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    }
-  }).then(response => {
-    console.log(response);
-    const trackList = response.data.items.map(item => ({
-      title: item.track.name,
-      artist: item.track.artists.reduce((str, artist) => {
-        return str + artist.name + ', '
-      }, ''),
-      album: item.album.name
-    }));
-
-    setTracks(trackList);
-  }).catch(error => console.log(error))
-
-  // useEffect(() => {
-
-  // }, [room])
+      setTracks(trackList);
+    }).catch(error => console.log(error))
+  }, [room])
 
   const handleSubmit = (event) => {
     alert("HI")
@@ -75,10 +67,10 @@ const ViewRoom = ({ history }) => {
         <MDBCol md="6">
           <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
             <Row>
-              <MDBIcon icon="search" />
+              <MDBIcon icon="plus" />
             </Row>
             <Col>
-              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search" aria-label="Search" />
+              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" />
             </Col>
           </MDBFormInline>
         </MDBCol>
@@ -94,7 +86,7 @@ const ViewRoom = ({ history }) => {
         </thead>
         <tbody>
           {tracks.map(track => (
-            <tr>
+            <tr key={track.id}>
               <td><Image src="public/logo192.png" thumbnail /></td>
               <td>{track.title}</td>
               <td>{track.artist}</td>
