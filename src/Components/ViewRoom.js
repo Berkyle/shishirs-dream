@@ -20,6 +20,9 @@ const ViewRoom = ({ history }) => {
   const [tracks, setTracks] = useState([])
   const [url, setUrl] = useState('')
   const [trackID, setTrackID] = useState('')
+  const [song, setSong] = useState('')
+  const [artist, setArtist] = useState('')
+  const [art, setArt] = useState('')
 
   const goBack = (event) => {
     event.preventDefault()
@@ -36,28 +39,41 @@ const ViewRoom = ({ history }) => {
         "Authorization": `Bearer ${token}`
       }
     }).then(response => {
-      console.log(response);
+      console.log(response.data.items)
       const trackList = response.data.items.map(item => ({
+        image: item.track.album.images[2].url,
         title: item.track.name,
         artist: item.track.artists.reduce((str, artist) => str + artist.name + ', ', ''),
         album: item.track.album.name,
         id: item.track.id
       }));
-
-      console.log(trackList);
-
       setTracks(trackList);
     }).catch(error => console.log(error))
+
+    axios.get(`https://api.spotify.com/v1/me/player/currently-playing`, {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    }).then(response => {
+      setSong(response.data.item.name);
+      setArtist(response.data.item.artists[0].name);
+      setArt(response.data.item.album.images[1].url);
+    });
   }, [room])
 
   const handleSubmit = (event) => {
     event.preventDefault()
     var val = "spotify%3Atrack%3A" + url.split('?')[0].split("/")[4];
     alert(val);
-    
+
     const id = room.playlistId;
     const token = room.access_token;
+<<<<<<< HEAD
     console.log(room);
+=======
+>>>>>>> c32a72d8b45636caae2a1589f8f8153cf98f4d29
 
     // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=${val.replace(/:/g ,'%3A')}`, {
     // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=spotify%3Atrack%3A3VZQshi4COChhXaz7cLP02`, {
@@ -71,35 +87,31 @@ const ViewRoom = ({ history }) => {
         "uris": [val] //.replace(/:/g ,'%3A'),
       }
     }).then(response => {
-      console.log(response);
       history.push('/joinroom');
     }).catch(error => console.log(error))
   }
 
   const getLyrics = (event) => {
     setTrackID("spotify:track:" + url.split('?')[0].split("/")[4]);
-    history.push('/view/lyrics')
+    history.push({pathname: '/view/lyrics', state: { artist, song }})
   }
 
   return (
     <Container>
       <div id="title">
         <h1 style={{ float: "center", position: "relative" }}>
-          {room.roomId}
+          Room {room.roomId}
         </h1>
       </div>
-      <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
-        <MDBCol md="6">
-          <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
-            <Row>
-              <Button size="sm" variant="dark"><MDBIcon icon="plus" onClick={handleSubmit} /></Button>
-            </Row>
-            <Col>
-              <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" onChange={event => setUrl(event.target.value)} value={url} />
-            </Col>
-          </MDBFormInline>
-        </MDBCol>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Image src={art} rounded />
       </div>
+      <div>
+        <h2 style={{color: 'white', display: 'flex', justifyContent: 'center' }}>
+          {song} by {artist}
+        </h2>
+      </div>
+<<<<<<< HEAD
       <Table responsive striped borderless hover variant="dark">
         <thead>
           <tr>
@@ -107,33 +119,54 @@ const ViewRoom = ({ history }) => {
             <th>Title </th>
             <th>Artist</th>
             <th>Album</th>
+=======
+    <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
+      <MDBCol md="6">
+        <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
+          <Row>
+            <Button size="sm" variant="dark"><MDBIcon icon="plus" onClick={handleSubmit} /></Button>
+          </Row>
+          <Col>
+            <input className="form-control form-control-sm ml-3 w-100" type="text" placeholder="Add Spotify URL" aria-label="Search" onChange={event => setUrl(event.target.value)} value={url} />
+          </Col>
+        </MDBFormInline>
+      </MDBCol>
+    </div>
+    <Table responsive striped borderless hover variant="dark">
+      <thead>
+        <tr>
+          <th>&#128247;</th>
+          <th>Title </th>
+          <th>Artist</th>
+          <th>Album</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tracks.map(track => (
+          <tr key={track.id}>
+            <td><Image src={track.image} thumbnail /></td>
+            <td>{track.title}</td>
+            <td>{track.artist}</td>
+            <td>{track.album}</td>
+>>>>>>> c32a72d8b45636caae2a1589f8f8153cf98f4d29
           </tr>
-        </thead>
-        <tbody>
-          {tracks.map(track => (
-            <tr key={track.id}>
-              <td><Image src="public/logo192.png" thumbnail /></td>
-              <td>{track.title}</td>
-              <td>{track.artist}</td>
-              <td>{track.album}</td>
-            </tr>
-          ))}
+        ))}
 
-        </tbody>
-      </Table>
-      <Row className="justify-content-between">
-        <Col xs="auto">
-          <Button size="lg" className="mx-auto" onClick={goBack} variant="dark">
-            <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
-          </Button>
-        </Col>
-        <Col xs="auto">
-          <Button size="lg" variant="dark" type="submit" onClick={getLyrics}>
-            Get Lyrics
+      </tbody>
+    </Table>
+    <Row className="justify-content-between">
+      <Col xs="auto">
+        <Button size="lg" className="mx-auto" onClick={goBack} variant="dark">
+          <i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
+        </Button>
+      </Col>
+      <Col xs="auto">
+        <Button size="lg" variant="dark" type="submit" onClick={getLyrics}>
+          Get Lyrics
             </Button>
-        </Col>
-      </Row>
-    </Container>
+      </Col>
+    </Row>
+    </Container >
   )
 }
 
