@@ -70,10 +70,6 @@ const ViewRoom = ({ history }) => {
 
     const id = room.playlistId;
     const token = room.access_token;
-<<<<<<< HEAD
-    console.log(room);
-=======
->>>>>>> c32a72d8b45636caae2a1589f8f8153cf98f4d29
 
     // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=${val.replace(/:/g ,'%3A')}`, {
     // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=spotify%3Atrack%3A3VZQshi4COChhXaz7cLP02`, {
@@ -111,15 +107,6 @@ const ViewRoom = ({ history }) => {
           {song} by {artist}
         </h2>
       </div>
-<<<<<<< HEAD
-      <Table responsive striped borderless hover variant="dark">
-        <thead>
-          <tr>
-            <th>&#128247;</th>
-            <th>Title </th>
-            <th>Artist</th>
-            <th>Album</th>
-=======
     <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
       <MDBCol md="6">
         <MDBFormInline className="form-inline my-4" onSubmit={handleSubmit}>
@@ -148,7 +135,6 @@ const ViewRoom = ({ history }) => {
             <td>{track.title}</td>
             <td>{track.artist}</td>
             <td>{track.album}</td>
->>>>>>> c32a72d8b45636caae2a1589f8f8153cf98f4d29
           </tr>
         ))}
 
