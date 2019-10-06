@@ -39,7 +39,6 @@ const ViewRoom = ({ history }) => {
         "Authorization": `Bearer ${token}`
       }
     }).then(response => {
-      console.log(response.data.items)
       const trackList = response.data.items.map(item => ({
         image: item.track.album.images[2].url,
         title: item.track.name,
@@ -57,13 +56,16 @@ const ViewRoom = ({ history }) => {
         "Authorization": `Bearer ${token}`
       }
     }).then(response => {
-      setSong(response.data.item.name);
-      setArtist(response.data.item.artists[0].name);
-      setArt(response.data.item.album.images[1].url);
+      if (response.data) {
+        setSong(response.data.item.name);
+        setArtist(response.data.item.artists[0].name);
+        setArt(response.data.item.album.images[1].url);
+      }
     });
   }, [room])
 
   const handleSubmit = (event) => {
+    // need to do playlists or track here
     event.preventDefault()
     var val = "spotify%3Atrack%3A" + url.split('?')[0].split("/")[4];
     alert(val);
@@ -104,7 +106,7 @@ const ViewRoom = ({ history }) => {
       </div>
       <div>
         <h2 style={{color: 'white', display: 'flex', justifyContent: 'center' }}>
-          {song} by {artist}
+          {song + "by"}{artist}
         </h2>
       </div>
     <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
@@ -147,9 +149,12 @@ const ViewRoom = ({ history }) => {
         </Button>
       </Col>
       <Col xs="auto">
-        <Button size="lg" variant="dark" type="submit" onClick={getLyrics}>
+        {artist && <Button size="lg" variant="dark" type="submit" onClick={getLyrics}>
           Get Lyrics
-            </Button>
+        </Button>}
+        {!artist && <Button size="lg" variant="dark" type="submit" disabled onClick={getLyrics}>
+          Get Lyrics
+        </Button>}
       </Col>
     </Row>
     </Container >

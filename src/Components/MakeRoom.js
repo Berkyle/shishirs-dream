@@ -56,29 +56,35 @@ const MakeRoom = ({ history }, props) => {
             }
         }).then(response => {
             const id = response.data.id;
-            axios({
-                method: "post",
-                url: `https://api.spotify.com/v1/users/${id}/playlists`,
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                data: {
-                    "name": `_SHISH_${roomName}`,
-                    "description": "somethin'",
-                    "public": false
-                }
-            }).then(response => {
-                const room = {
-                    access_token: token,
-                    playlistId: response.data.id,
-                    roomId: roomName,
-                    roomPwd: roomPwd
-                }
-                dispatchToRoom({ type: "CREATE", room })
-                alert('Room created!');
-                history.push('/view');
-            }).catch(error => console.log(error));
+            // axios({
+            //     method: "post",
+            //     url: `https://api.spotify.com/v1/users/${id}/playlists`,
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         "Authorization": `Bearer ${token}`
+            //     },
+            //     data: {
+            //         "name": `_SHISH_${roomName}`,
+            //         "description": "somethin'",
+            //         "public": false
+            //     }
+            // }).then(response => {
+            //     const room = {
+            //         access_token: token,
+            //         playlistId: response.data.id,
+            //         roomId: roomName,
+            //         roomPwd: roomPwd
+            //     }
+            // }).catch(error => console.log(error));
+            const room = {
+                access_token: token,
+                playlistId: response.data.id,
+                roomId: roomName,
+                roomPwd: roomPwd
+            }
+            dispatchToRoom({ type: "CREATE", room })
+            alert('Room created!');
+            history.push('/view');
         }).catch(error => console.log(error));
     }
 
